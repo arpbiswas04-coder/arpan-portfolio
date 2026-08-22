@@ -16,7 +16,7 @@ export const BackgroundVideo: React.FC = () => {
       </video>
 
       {/* Dark semi-transparent overlay to maintain contrast & readability */}
-      <div className="absolute inset-0 bg-[#030014]/50 backdrop-blur-[1px]" />
+      <div className="absolute inset-0 bg-[#030014]/50 backdrop-blur-[0px]" />
     </div>
   );
 };

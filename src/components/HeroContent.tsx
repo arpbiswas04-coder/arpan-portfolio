@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const ROTATING_WORDS = ["DATA", "INNOVATION", "IMPACT", "TEAMWORK"];
+const ROTATING_WORDS = ["DATA", "INNOVATION", "IMPACT", "TEAMWORK", "LEADERSHIP", "COLLABORATION"];
 const CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
 
 interface ScrambleTextProps {
@@ -68,9 +68,9 @@ export const HeroContent: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative z-20 flex-1 flex flex-col justify-between px-6 sm:px-10 md:px-16 pt-24 sm:pt-28 md:pt-32 pb-24 pointer-events-none select-none max-w-7xl mx-auto w-full h-full">
+    <div className="relative z-20 flex-1 px-6 sm:px-10 md:px-16 pt-24 sm:pt-28 md:pt-32 pb-24 pointer-events-none select-none max-w-7xl mx-auto w-full h-full">
       {/* Top Left: Headline Container */}
-      <div className="flex flex-col items-start justify-start text-left space-y-0 leading-none max-w-3xl">
+      <div className="flex flex-col items-start justify-start text-left space-y-0 leading-none max-w-3xl translate-x-[-50px] translate-y-[60px]">
         {/* Top Line: BUILD WITH */}
         <h2 className="font-display tracking-wider text-stroke-white text-[28px] sm:text-[44px] md:text-[58px] lg:text-[72px] uppercase font-black transform scale-y-110 mb-1 sm:mb-2 text-left">
           BUILD WITH
@@ -84,8 +84,8 @@ export const HeroContent: React.FC = () => {
         </div>
       </div>
 
-      {/* Bottom Right: Bio Container & Badge */}
-      <div className="flex flex-col items-end text-right self-end mt-auto max-w-md sm:max-w-lg md:max-w-xl">
+      {/* Top Right: Bio Container & Badge */}
+      <div className="absolute top-24 sm:top-28 md:top-32 right-6 sm:right-10 md:right-16 flex flex-col items-end text-right max-w-md sm:max-w-lg md:max-w-xl z-20">
         {/* Typewriter Bio Container */}
         <div className="text-right">
           <p className="font-sans text-sm sm:text-base md:text-lg text-white/80 font-normal leading-relaxed tracking-wide min-h-[3.5rem] text-right">
@@ -112,7 +112,7 @@ export const HeroContent: React.FC = () => {
         </div>
 
         {/* Meta indicator badge */}
-        <div className="mt-6 flex items-center justify-end gap-3 font-mono text-[11px] uppercase tracking-widest text-white/50 text-right">
+        <div className="mt-4 sm:mt-6 flex items-center justify-end gap-3 font-mono text-[11px] uppercase tracking-widest text-white/50 text-right">
           <span className="w-2 h-2 rounded-full bg-[#CCFF00] animate-ping" />
           <span>AVAILABLE FOR AI/ML ENGINEERING & SYSTEM ARCHITECTURE</span>
         </div>
