@@ -12,7 +12,7 @@ export const BackgroundVideo: React.FC = () => {
         preload="auto"
         className="w-full h-full object-cover filter brightness-90 contrast-105"
       >
-        <source src="/background.mp4" type="video/mp4" />
+        <source src="/video.mp4" type="video/mp4" />
       </video>
 
       {/* Dark semi-transparent overlay to maintain contrast & readability */}
