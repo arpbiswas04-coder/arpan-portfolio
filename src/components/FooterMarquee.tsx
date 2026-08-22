@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const FooterMarquee: React.FC = () => {
-  const marqueeText = "ARPAN // CREATIVE DIRECTOR // ARPAN // CREATIVE DIRECTOR // ARPAN // CREATIVE DIRECTOR // ";
+  const marqueeText = "ARPAN // AI/ML ENGINEER // ARPAN // AI/ML ENGINEER // ARPAN // AI/ML ENGINEER // ";
 
   return (
     <div className="absolute bottom-0 left-0 right-0 z-30 overflow-hidden pointer-events-none select-none py-2 bg-gradient-to-t from-[#030014] to-transparent">

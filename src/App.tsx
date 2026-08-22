@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { ParticleBackground } from './components/ParticleBackground';
+import { BackgroundVideo } from './components/BackgroundVideo';
+import { CursorGlow } from './components/CursorGlow';
 import { Header } from './components/Header';
 import { HeroContent } from './components/HeroContent';
 import { HeroImage } from './components/HeroImage';
@@ -21,8 +22,11 @@ export function App() {
 
   return (
     <main className="relative w-full h-screen min-h-screen overflow-hidden flex flex-col justify-between bg-[#030014] text-white selection:bg-[#CCFF00] selection:text-black">
-      {/* z-0: WebGL Particle Background */}
-      <ParticleBackground />
+      {/* Background Video */}
+      <BackgroundVideo />
+
+      {/* Cursor Reactive Glow Layer */}
+      <CursorGlow />
 
       {/* z-30: Fixed Header */}
       <Header onOpenDrawer={handleOpenDrawer} />

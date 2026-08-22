@@ -68,51 +68,54 @@ export const HeroContent: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative z-20 flex-1 flex flex-col items-center justify-center text-center px-4 pt-20 pb-28 md:py-0 pointer-events-none select-none max-w-7xl mx-auto w-full">
-      {/* Mammoth Headline Container */}
-      <div className="flex flex-col items-center justify-center space-y-0 leading-none mb-6">
+    <div className="relative z-20 flex-1 flex flex-col justify-between px-6 sm:px-10 md:px-16 pt-24 sm:pt-28 md:pt-32 pb-24 pointer-events-none select-none max-w-7xl mx-auto w-full h-full">
+      {/* Top Left: Headline Container */}
+      <div className="flex flex-col items-start justify-start text-left space-y-0 leading-none max-w-3xl">
         {/* Top Line: BUILD WITH */}
-        <h2 className="font-display tracking-wider text-stroke-white text-[24px] sm:text-[42px] md:text-[56px] lg:text-[70px] uppercase font-black transform scale-y-110 mb-1 sm:mb-2">
+        <h2 className="font-display tracking-wider text-stroke-white text-[28px] sm:text-[44px] md:text-[58px] lg:text-[72px] uppercase font-black transform scale-y-110 mb-1 sm:mb-2 text-left">
           BUILD WITH
         </h2>
 
         {/* Bottom Line: Rotates with Scramble Effect */}
-        <div className="h-[60px] sm:h-[90px] md:h-[130px] lg:h-[170px] xl:h-[200px] flex items-center justify-center">
-          <h1 className="font-display text-[#CCFF00] text-[50px] sm:text-[85px] md:text-[120px] lg:text-[150px] xl:text-[180px] font-black uppercase tracking-tight leading-none drop-shadow-[0_0_40px_rgba(204,255,0,0.4)]">
+        <div className="h-[60px] sm:h-[90px] md:h-[130px] lg:h-[160px] xl:h-[190px] flex items-center justify-start text-left">
+          <h1 className="font-display text-[#CCFF00] text-[50px] sm:text-[85px] md:text-[120px] lg:text-[150px] xl:text-[175px] font-black uppercase tracking-tight leading-none drop-shadow-[0_0_40px_rgba(204,255,0,0.4)] text-left">
             <ScrambleText wordIndex={wordIndex} />
           </h1>
         </div>
       </div>
 
-      {/* Typewriter Bio Container */}
-      <div className="max-w-xl md:max-w-2xl mx-auto mt-4 sm:mt-6 px-4">
-        <p className="font-sans text-sm sm:text-base md:text-lg text-white/80 font-normal leading-relaxed tracking-wide min-h-[3.5rem]">
-          <AnimatePresence mode="wait">
-            <motion.span key={bioKey} className="inline-block">
-              {bioText.split("").map((char, index) => (
-                <motion.span
-                  key={`${bioKey}-${index}`}
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    delay: index * 0.02,
-                    duration: 0.05,
-                    ease: "easeOut",
-                  }}
-                  className="inline-block"
-                >
-                  {char === " " ? "\u00A0" : char}
-                </motion.span>
-              ))}
-            </motion.span>
-          </AnimatePresence>
-        </p>
-      </div>
+      {/* Bottom Right: Bio Container & Badge */}
+      <div className="flex flex-col items-end text-right self-end mt-auto max-w-md sm:max-w-lg md:max-w-xl">
+        {/* Typewriter Bio Container */}
+        <div className="text-right">
+          <p className="font-sans text-sm sm:text-base md:text-lg text-white/80 font-normal leading-relaxed tracking-wide min-h-[3.5rem] text-right">
+            <AnimatePresence mode="wait">
+              <motion.span key={bioKey} className="inline-block text-right">
+                {bioText.split("").map((char, index) => (
+                  <motion.span
+                    key={`${bioKey}-${index}`}
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      delay: index * 0.02,
+                      duration: 0.05,
+                      ease: "easeOut",
+                    }}
+                    className="inline-block"
+                  >
+                    {char === " " ? "\u00A0" : char}
+                  </motion.span>
+                ))}
+              </motion.span>
+            </AnimatePresence>
+          </p>
+        </div>
 
-      {/* Meta indicator badge */}
-      <div className="mt-8 flex items-center gap-3 font-mono text-[11px] uppercase tracking-widest text-white/40">
-        <span className="w-2 h-2 rounded-full bg-[#CCFF00] animate-ping" />
-        <span>AVAILABLE FOR CREATIVE DIRECTION & SYSTEM ARCHITECTURE</span>
+        {/* Meta indicator badge */}
+        <div className="mt-6 flex items-center justify-end gap-3 font-mono text-[11px] uppercase tracking-widest text-white/50 text-right">
+          <span className="w-2 h-2 rounded-full bg-[#CCFF00] animate-ping" />
+          <span>AVAILABLE FOR AI/ML ENGINEERING & SYSTEM ARCHITECTURE</span>
+        </div>
       </div>
     </div>
   );
