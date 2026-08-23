@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ArrowLeft, Send, CheckCircle2, Download, ExternalLink, Code2, Cpu, Globe, Sparkles, User, Briefcase, Rocket, FileText } from 'lucide-react';
+import { X, ArrowLeft, Send, CheckCircle2, Download, ExternalLink, Code2, Cpu, Globe, Sparkles, User, Briefcase, Rocket, FileText, Github, Linkedin } from 'lucide-react';
 
 interface InfoDrawerProps {
   isOpen: boolean;
@@ -20,8 +20,7 @@ export const InfoDrawer: React.FC<InfoDrawerProps> = ({
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    projectType: 'Web Application',
-    budget: '$5k - $10k',
+    projectType: '',
     message: '',
   });
 
@@ -42,8 +41,7 @@ export const InfoDrawer: React.FC<InfoDrawerProps> = ({
       setFormData({
         name: '',
         email: '',
-        projectType: 'Web Application',
-        budget: '$5k - $10k',
+        projectType: '',
         message: '',
       });
     }, 4000);
@@ -52,60 +50,82 @@ export const InfoDrawer: React.FC<InfoDrawerProps> = ({
   const navItems = [
     { id: 'ABOUT', label: 'ABOUT', desc: 'Background & Philosophy', icon: User },
     { id: 'PROJECTS', label: 'PROJECTS', desc: 'Featured Work & Case Studies', icon: Rocket },
-    { id: 'EXPERIENCE', label: 'EXPERIENCE', desc: 'Leadership & Engineering', icon: Briefcase },
+    { id: 'EXPERIENCE', label: 'JOURNEY', desc: 'Academic & Hackathon Timeline', icon: Briefcase },
     { id: 'RESUME', label: 'RESUME', desc: 'Technical Skills & CV', icon: FileText },
     { id: "LET'S BUILD", label: "LET'S BUILD", desc: 'Commission & Consultation', icon: Sparkles },
   ];
 
   const projects = [
     {
-      title: 'Aether Canvas',
-      category: 'WebGL & Generative AI',
-      desc: 'Real-time node-based shader synth combining 3D WebGL scenes with generative AI texture synthesis.',
-      tech: ['React', 'Three.js', 'WebGL', 'Tailwind'],
-      link: '#',
+      title: 'ArenaX Chess',
+      category: 'AI-Powered Web App',
+      desc: 'A premium, AI-powered single-page chess platform with immersive game modes, a real-time AI tutor, and multiple engine difficulty levels.',
+      tech: ['React', 'Gemini AI', 'JavaScript'],
+      link: 'https://github.com/arpbiswas04-coder/ArenaX-Chess',
+      screenshot: '/projects/arenax-chess.png',
     },
     {
-      title: 'NeuronFlow OS',
-      category: 'Distributed Systems',
-      desc: 'High-throughput real-time stream processor for high-frequency data pipelines and AI agent orchestration.',
-      tech: ['TypeScript', 'Rust', 'WebSockets', 'Tailwind'],
-      link: '#',
+      title: 'GitHub Dev Card Generator',
+      category: 'AI Agents & Automation',
+      desc: 'An AI-powered developer card generator that orchestrates intelligent agents to analyze GitHub profiles and render high-fidelity, interactive developer cards with curated aesthetic themes.',
+      tech: ['Google ADK', 'FastMCP', 'FastAPI', 'Gemini'],
+      link: 'https://github.com/arpbiswas04-coder/Github-card-generator',
+      screenshot: '/projects/github-card-generator.png',
     },
     {
-      title: 'Hyperion Design System',
-      category: 'UI/UX & Design Tokens',
-      desc: 'Ultra-fast, high-contrast dark-mode component architecture built for high-scale enterprise tools.',
-      tech: ['React', 'Framer Motion', 'Tailwind CSS'],
-      link: '#',
+      title: 'Meghdrishti',
+      category: 'ISRO BAH 2026 — Team Trinova',
+      desc: 'GenAI-based cloud removal and reconstruction system for LISS-IV satellite imagery, built for the Bharatiya Antariksh Hackathon 2026.',
+      tech: ['Python', 'GAN', 'PyTorch'],
+      link: 'https://github.com/arpbiswas04-coder/Meghdrishti',
+      screenshot: '/projects/meghdrishti.png',
     },
     {
-      title: 'OmniVanguard AI',
-      category: 'LLM Multi-Agent System',
-      desc: 'Autonomous multi-agent system executing real-time code refactoring and performance profiling.',
-      tech: ['Python', 'TypeScript', 'Docker', 'OpenAI'],
-      link: '#',
+      title: 'Enterprise AI Interviewer',
+      category: 'Vibecodethon — Team Vector',
+      desc: "An adaptive, multi-turn AI technical interview agent that conducts realistic, personalized interviews grounded in a candidate's actual learning journey — not a scripted quiz.",
+      tech: ['Python', 'LLM Agents'],
+      link: 'https://github.com/arpbiswas04-coder/Vibecodethon',
+      screenshot: '/projects/vibecodethon.png',
+    },
+    {
+      title: 'Multiple Disease Predictor',
+      category: 'HackArena HIT',
+      desc: 'An AI-powered diagnostic and wellness advisory system predicting heart and kidney disease risk using custom-trained ML models, with an interactive wellness advisory dashboard.',
+      tech: ['Python', 'Streamlit', 'scikit-learn'],
+      link: 'https://github.com/arpbiswas04-coder/HACKARENA-HIT',
+      screenshot: '/projects/hackarena-hit.png',
+    },
+    {
+      title: 'Aadhaar Anomaly & Fraud Detection',
+      category: 'UIDAI Hackathon 2026',
+      desc: 'An unsupervised ML system using Isolation Forest to detect fraudulent activity and operational anomalies across Aadhaar enrollment and update registries.',
+      tech: ['Python', 'Isolation Forest', 'Pandas'],
+      link: 'https://github.com/arpbiswas04-coder/UIDAI-HACKATHON-2026',
+      screenshot: '/projects/uidai-hackathon-2026.png',
+    },
+    {
+      title: 'Smart Parking System',
+      category: 'Embedded Systems',
+      desc: 'A smart parking system (built in Tinkercad) with automated entry/exit gating via ultrasonic sensors, real-time slot occupancy tracking, and PIR-based eco power-saving for the display.',
+      tech: ['Arduino', 'C++'],
+      link: 'https://github.com/arpbiswas04-coder/Smart-Parking-System',
+      screenshot: '/projects/smart-parking-system.png',
     },
   ];
 
   const experience = [
     {
-      role: 'Team Lead & Creative Director',
-      company: 'Apex Vanguard Labs',
-      period: '2024 — Present',
-      desc: 'Directing frontend architecture and engineering teams for real-time 3D and AI-driven client dashboards.',
+      role: 'First Year',
+      company: '2025',
+      period: 'SGPA: 9.58',
+      desc: 'Built HackArena HIT (multiple disease predictor), the UIDAI Hackathon 2026 fraud detection system, and the GitHub Dev Card Generator.',
     },
     {
-      role: 'Full Stack Engineer Intern',
-      company: 'Quantum Dynamics',
-      period: '2023 — 2024',
-      desc: 'Architected micro-frontend systems, reducing web bundle sizes by 42% and implementing custom WebGL visualizers.',
-    },
-    {
-      role: 'Hackathon Lead & Open Source Dev',
-      company: 'Global Tech Community',
-      period: '2022 — Present',
-      desc: 'Won 4 national hackathons building AI tools; active maintainer of generative UI open-source packages.',
+      role: 'Second Year',
+      company: 'Current',
+      period: '2026 — Present',
+      desc: 'Competing in the Bharatiya Antariksh Hackathon 2026 by ISRO (Team Trinova), the Vibecodethon by AB Talks (Team Vector), and the Tejas India Hackathon.',
     },
   ];
 
@@ -143,7 +163,7 @@ export const InfoDrawer: React.FC<InfoDrawerProps> = ({
                 )}
                 <div>
                   <h3 className="font-display text-xl tracking-wider text-white uppercase flex items-center gap-2">
-                    {activeTab === 'MENU' ? 'NAVIGATION' : activeTab}
+                    {activeTab === 'MENU' ? 'NAVIGATION' : activeTab === 'EXPERIENCE' ? 'JOURNEY' : activeTab}
                   </h3>
                   <p className="font-mono text-xs text-[#CCFF00]">ARPAN // DIGITAL PORTFOLIO</p>
                 </div>
@@ -230,6 +250,57 @@ export const InfoDrawer: React.FC<InfoDrawerProps> = ({
                       <span className="text-white font-semibold text-sm">Global / Remote</span>
                     </div>
                   </div>
+
+                  {/* GitHub & LinkedIn Link Boxes */}
+                  <div className="space-y-3 pt-2">
+                    <a
+                      href="https://github.com/arpbiswas04-coder"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group relative flex items-center justify-between p-5 rounded-xl border border-white/10 bg-white/5 hover:bg-[#CCFF00] hover:text-black transition-all duration-300 text-left overflow-hidden"
+                    >
+                      <div className="flex items-center gap-4 relative z-10">
+                        <div className="w-10 h-10 rounded-lg border border-white/20 group-hover:border-black/30 flex items-center justify-center bg-black/20 group-hover:bg-black text-[#CCFF00] group-hover:text-[#CCFF00]">
+                          <Github className="w-5 h-5" />
+                        </div>
+                        <div>
+                          <h4 className="font-display text-2xl tracking-wider uppercase">
+                            GITHUB
+                          </h4>
+                          <p className="font-sans text-xs text-white/60 group-hover:text-black/80 font-medium">
+                            arpbiswas04-coder
+                          </p>
+                        </div>
+                      </div>
+                      <span className="font-mono text-lg group-hover:translate-x-1 transition-transform relative z-10">
+                        →
+                      </span>
+                    </a>
+
+                    <a
+                      href="https://linkedin.com/in/YOUR-HANDLE"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group relative flex items-center justify-between p-5 rounded-xl border border-white/10 bg-white/5 hover:bg-[#CCFF00] hover:text-black transition-all duration-300 text-left overflow-hidden"
+                    >
+                      <div className="flex items-center gap-4 relative z-10">
+                        <div className="w-10 h-10 rounded-lg border border-white/20 group-hover:border-black/30 flex items-center justify-center bg-black/20 group-hover:bg-black text-[#CCFF00] group-hover:text-[#CCFF00]">
+                          <Linkedin className="w-5 h-5" />
+                        </div>
+                        <div>
+                          <h4 className="font-display text-2xl tracking-wider uppercase">
+                            LINKEDIN
+                          </h4>
+                          <p className="font-sans text-xs text-white/60 group-hover:text-black/80 font-medium">
+                            Connect with me
+                          </p>
+                        </div>
+                      </div>
+                      <span className="font-mono text-lg group-hover:translate-x-1 transition-transform relative z-10">
+                        →
+                      </span>
+                    </a>
+                  </div>
                 </div>
               )}
 
@@ -241,33 +312,51 @@ export const InfoDrawer: React.FC<InfoDrawerProps> = ({
                   </p>
                   <div className="grid grid-cols-1 gap-4">
                     {projects.map((proj, idx) => (
-                      <div
+                      <a
                         key={idx}
-                        className="p-5 rounded-xl border border-white/10 bg-white/5 hover:border-[#CCFF00]/50 transition-all space-y-3 group"
+                        href={proj.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group block p-5 rounded-xl border border-white/10 bg-white/5 hover:bg-[#CCFF00] hover:text-black transition-all duration-300 text-left overflow-hidden space-y-3"
                       >
+                        {/* Screenshot placeholder box with graceful fallback */}
+                        <div className="aspect-video w-full rounded-lg bg-black/30 border border-white/10 flex items-center justify-center overflow-hidden">
+                          <img
+                            src={proj.screenshot}
+                            alt={proj.title}
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              (e.currentTarget as HTMLElement).style.display = 'none';
+                            }}
+                          />
+                        </div>
+
                         <div className="flex items-center justify-between">
-                          <span className="font-mono text-xs text-[#CCFF00] uppercase tracking-wider">
+                          <span className="font-mono text-xs text-[#CCFF00] group-hover:text-black/70 font-semibold uppercase tracking-wider">
                             {proj.category}
                           </span>
-                          <ExternalLink className="w-4 h-4 text-white/40 group-hover:text-[#CCFF00] transition-colors" />
+                          <ExternalLink className="w-4 h-4 text-white/40 group-hover:text-black transition-colors" />
                         </div>
-                        <h4 className="font-display text-xl tracking-wide uppercase text-white group-hover:text-[#CCFF00] transition-colors">
+
+                        <h4 className="font-display text-xl tracking-wide uppercase text-white group-hover:text-black transition-colors">
                           {proj.title}
                         </h4>
-                        <p className="font-sans text-xs text-white/70 leading-relaxed">
+
+                        <p className="font-sans text-xs text-white/70 group-hover:text-black/80 leading-relaxed transition-colors">
                           {proj.desc}
                         </p>
+
                         <div className="flex flex-wrap gap-2 pt-2">
                           {proj.tech.map((t, i) => (
                             <span
                               key={i}
-                              className="font-mono text-[10px] px-2.5 py-1 rounded bg-white/10 text-white/80"
+                              className="font-mono text-[10px] px-2.5 py-1 rounded bg-white/10 group-hover:bg-black/10 text-white/80 group-hover:text-black font-medium transition-colors"
                             >
                               {t}
                             </span>
                           ))}
                         </div>
-                      </div>
+                      </a>
                     ))}
                   </div>
                 </div>
@@ -277,7 +366,7 @@ export const InfoDrawer: React.FC<InfoDrawerProps> = ({
               {activeTab === 'EXPERIENCE' && (
                 <div className="space-y-6">
                   <p className="font-mono text-xs text-white/50 tracking-widest uppercase">
-                    // LEADERSHIP & CAREER TRACK
+                    // ACADEMIC & HACKATHON TIMELINE
                   </p>
                   <div className="relative border-l border-white/20 pl-6 space-y-8 ml-2">
                     {experience.map((item, idx) => (
@@ -314,7 +403,7 @@ export const InfoDrawer: React.FC<InfoDrawerProps> = ({
                       </button>
                     </div>
                     <p className="text-xs text-white/70 leading-relaxed">
-                      Comprehensive technical skill set spanning frontend architecture, WebGL graphics programming, distributed cloud backends, and creative direction.
+                      Computer Science undergrad specializing in AI and ML, with hands-on experience deploying Python projects using FastAPI, Docker, and Google Cloud Run, and building AI agent systems with Google ADK, Gemini, and MCP.
                     </p>
                   </div>
 
@@ -331,9 +420,12 @@ export const InfoDrawer: React.FC<InfoDrawerProps> = ({
                         'System Architecture',
                         'Team Leadership',
                       ].map((skill, idx) => (
-                        <div key={idx} className="p-3 rounded-lg border border-white/10 bg-white/5 flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#CCFF00]" />
-                          <span className="text-white/90">{skill}</span>
+                        <div
+                          key={idx}
+                          className="p-3 rounded-lg border border-white/10 bg-white/5 hover:bg-[#CCFF00] hover:text-black transition-all duration-300 group flex items-center gap-2"
+                        >
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#CCFF00] group-hover:bg-black transition-colors" />
+                          <span className="text-white/90 group-hover:text-black font-medium transition-colors">{skill}</span>
                         </div>
                       ))}
                     </div>
@@ -391,35 +483,16 @@ export const InfoDrawer: React.FC<InfoDrawerProps> = ({
                         />
                       </div>
 
-                      {/* Project Type Select */}
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="space-y-1">
-                          <label className="font-mono text-xs text-white/60 uppercase block">PROJECT TYPE</label>
-                          <select
-                            value={formData.projectType}
-                            onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
-                            className="w-full bg-transparent border-b border-white/30 focus:border-[#CCFF00] outline-none transition-colors py-3 text-white font-sans text-sm cursor-pointer [&>option]:bg-[#333333] [&>option]:text-white"
-                          >
-                            <option value="Web Application">Web Application</option>
-                            <option value="3D / WebGL Experience">3D / WebGL Experience</option>
-                            <option value="AI Integration">AI Integration</option>
-                            <option value="Full System Lead">Full System Lead</option>
-                          </select>
-                        </div>
-
-                        <div className="space-y-1">
-                          <label className="font-mono text-xs text-white/60 uppercase block">BUDGET RANGE</label>
-                          <select
-                            value={formData.budget}
-                            onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                            className="w-full bg-transparent border-b border-white/30 focus:border-[#CCFF00] outline-none transition-colors py-3 text-white font-sans text-sm cursor-pointer [&>option]:bg-[#333333] [&>option]:text-white"
-                          >
-                            <option value="<$5k">&lt;$5k</option>
-                            <option value="$5k - $10k">$5k - $10k</option>
-                            <option value="$10k - $25k">$10k - $25k</option>
-                            <option value="$25k+">$25k+</option>
-                          </select>
-                        </div>
+                      {/* Project Type Input */}
+                      <div className="space-y-1">
+                        <label className="font-mono text-xs text-white/60 uppercase block">PROJECT TYPE</label>
+                        <input
+                          type="text"
+                          value={formData.projectType}
+                          onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
+                          placeholder="e.g. Web App, AI Integration, Full System Lead..."
+                          className="w-full bg-transparent border-b border-white/30 focus:border-[#CCFF00] outline-none transition-colors py-3 text-white placeholder-white/30 font-sans text-sm"
+                        />
                       </div>
 
                       {/* Message Textarea */}
