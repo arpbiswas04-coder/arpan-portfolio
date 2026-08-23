@@ -145,8 +145,8 @@ export const HeroContent: React.FC = () => {
             leading-none
             scale-y-110
 
-            text-[40px]
-            sm:text-[44px]
+            text-[46px]
+            sm:text-[50px]
             md:text-[44px]
             lg:text-[54px]
             xl:text-[72px]
@@ -171,8 +171,8 @@ export const HeroContent: React.FC = () => {
 
             text-[#CCFF00]
 
-            text-[clamp(52px,15vw,76px)]
-            sm:text-[88px]
+            text-[clamp(58px,17vw,84px)]
+            sm:text-[96px]
             md:text-[90px]
             lg:text-[116px]
             xl:text-[155px]
@@ -191,23 +191,107 @@ export const HeroContent: React.FC = () => {
 
 
       {/* =====================================================
-          MOBILE ONLY: AVAILABILITY BADGE & BIO PARAGRAPH
+          MOBILE ONLY: STACKED BIO PARAGRAPH & AVAILABILITY BADGE
           ===================================================== */}
 
-      <div className="block md:hidden">
-        {/* Availability Badge at top left */}
+      <div
+        className="
+          block
+          md:hidden
+
+          absolute
+          top-[22%]
+          left-[20px]
+          sm:left-[25px]
+
+          w-[55%]
+          sm:w-[50%]
+
+          flex
+          flex-col
+          items-start
+
+          text-left
+          z-20
+        "
+      >
+        {/* BIO PARAGRAPH */}
+        <p
+          className="
+            font-poppins
+            text-white/80
+            font-normal
+            leading-relaxed
+            tracking-wide
+            text-left
+
+            text-[11px]
+            sm:text-xs
+
+            min-h-[3.5rem]
+            whitespace-normal
+            break-normal
+          "
+        >
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={bioKey}
+              className="inline-block text-left"
+            >
+              {(() => {
+                let globalCharIndex = 0;
+                const words = bioText.split(" ");
+
+                return words.map((word, wordIndex) => {
+                  const chars = word.split("");
+                  const wordStartIndex = globalCharIndex;
+                  globalCharIndex += chars.length + 1;
+
+                  return (
+                    <span
+                      key={`word-m-${wordIndex}`}
+                      className="inline-block whitespace-nowrap"
+                    >
+                      {chars.map((char, charIndex) => {
+                        const charGlobalIndex = wordStartIndex + charIndex;
+                        return (
+                          <motion.span
+                            key={`m-${bioKey}-${charGlobalIndex}`}
+                            initial={{ opacity: 0, y: 6 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{
+                              delay: charGlobalIndex * 0.02,
+                              duration: 0.05,
+                              ease: "easeOut",
+                            }}
+                            className="inline-block"
+                          >
+                            {char}
+                          </motion.span>
+                        );
+                      })}
+                      {wordIndex < words.length - 1 && (
+                        <span className="inline-block">&nbsp;</span>
+                      )}
+                    </span>
+                  );
+                });
+              })()}
+            </motion.span>
+          </AnimatePresence>
+        </p>
+
+        {/* AVAILABILITY INDICATOR (stacked directly below bio) */}
         <div
           className="
-            absolute
-            top-[9%]
-            left-[20px]
-            sm:left-[25px]
+            mt-3
+            sm:mt-4
 
             flex
             items-center
             gap-2
 
-            font-mono
+            font-poppins
             uppercase
             tracking-widest
             text-white/50
@@ -215,99 +299,12 @@ export const HeroContent: React.FC = () => {
 
             text-[8px]
             sm:text-[9px]
-
-            z-20
           "
         >
           <span className="w-1.5 h-1.5 rounded-full bg-[#CCFF00] animate-ping shrink-0" />
           <span>
             AVAILABLE FOR AI/ML ENGINEERING &amp; SYSTEM ARCHITECTURE
           </span>
-        </div>
-
-        {/* Bio Paragraph to the left of the image */}
-        <div
-          className="
-            absolute
-            top-[22%]
-            left-[20px]
-            sm:left-[25px]
-
-            w-[55%]
-            sm:w-[50%]
-
-            flex
-            flex-col
-            items-start
-
-            text-left
-            z-20
-          "
-        >
-          <p
-            className="
-              font-sans
-              text-white/80
-              font-normal
-              leading-relaxed
-              tracking-wide
-              text-left
-
-              text-[11px]
-              sm:text-xs
-
-              min-h-[3.5rem]
-              whitespace-normal
-              break-normal
-            "
-          >
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={bioKey}
-                className="inline-block text-left"
-              >
-                {(() => {
-                  let globalCharIndex = 0;
-                  const words = bioText.split(" ");
-
-                  return words.map((word, wordIndex) => {
-                    const chars = word.split("");
-                    const wordStartIndex = globalCharIndex;
-                    globalCharIndex += chars.length + 1;
-
-                    return (
-                      <span
-                        key={`word-m-${wordIndex}`}
-                        className="inline-block whitespace-nowrap"
-                      >
-                        {chars.map((char, charIndex) => {
-                          const charGlobalIndex = wordStartIndex + charIndex;
-                          return (
-                            <motion.span
-                              key={`m-${bioKey}-${charGlobalIndex}`}
-                              initial={{ opacity: 0, y: 6 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{
-                                delay: charGlobalIndex * 0.02,
-                                duration: 0.05,
-                                ease: "easeOut",
-                              }}
-                              className="inline-block"
-                            >
-                              {char}
-                            </motion.span>
-                          );
-                        })}
-                        {wordIndex < words.length - 1 && (
-                          <span className="inline-block">&nbsp;</span>
-                        )}
-                      </span>
-                    );
-                  });
-                })()}
-              </motion.span>
-            </AnimatePresence>
-          </p>
         </div>
       </div>
 
@@ -343,7 +340,7 @@ export const HeroContent: React.FC = () => {
         <div className="w-full text-right">
           <p
             className="
-              font-sans
+              font-poppins
               text-white/80
               font-normal
               leading-relaxed
@@ -421,7 +418,7 @@ export const HeroContent: React.FC = () => {
             gap-2
             sm:gap-3
 
-            font-mono
+            font-poppins
             uppercase
             tracking-widest
             text-white/50

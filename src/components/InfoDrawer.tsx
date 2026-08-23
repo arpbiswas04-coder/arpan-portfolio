@@ -489,7 +489,7 @@ export const InfoDrawer: React.FC<InfoDrawerProps> = ({
                           ) : (
                             <>
                               <div className="absolute -left-[31px] top-1.5 w-3 h-3 rounded-full bg-[#333333] border-2 border-white group-hover:bg-white transition-colors" />
-                              <h5 className="font-sans text-sm font-semibold text-[#CCFF00]">
+                              <h5 className={`font-sans text-sm font-semibold ${item.title === 'GitHub Dev Card Generator' || item.title === 'ArenaX Chess' ? 'text-white' : 'text-[#CCFF00]'}`}>
                                 {item.title}
                               </h5>
                               <p className="font-sans text-xs text-white/70 leading-relaxed mt-1">

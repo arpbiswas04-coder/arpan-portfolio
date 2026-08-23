@@ -55,16 +55,6 @@ export const Header: React.FC<HeaderProps> = ({ onOpenDrawer }) => {
 
       {/* Action Controls Group */}
       <div className="flex items-center gap-2 sm:gap-3">
-        {/* Mobile Menu Trigger (Visible only below md) */}
-        <button
-          onClick={() => onOpenDrawer('MENU')}
-          className="flex md:hidden items-center gap-1 font-mono text-xs px-3 py-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-md text-white hover:border-[#CCFF00] hover:text-[#CCFF00] transition-all duration-300 cursor-pointer"
-          aria-label="Open Menu"
-        >
-          <Menu className="w-3.5 h-3.5 text-[#CCFF00]" />
-          <span className="tracking-widest uppercase text-[10px]">MENU</span>
-        </button>
-
         {/* Action Button: LET'S BUILD */}
         <button
           onClick={() => onOpenDrawer("LET'S BUILD")}
@@ -73,6 +63,15 @@ export const Header: React.FC<HeaderProps> = ({ onOpenDrawer }) => {
           <Sparkles className="w-3.5 h-3.5 text-[#CCFF00] group-hover:text-black transition-colors" />
           <span className="tracking-widest uppercase text-[10px] md:text-xs">LET'S BUILD</span>
           <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        </button>
+
+        {/* Mobile Menu Trigger (Visible only below md, icon-only) */}
+        <button
+          onClick={() => onOpenDrawer('MENU')}
+          className="flex md:hidden items-center justify-center p-2.5 rounded-full border border-white/20 bg-white/5 backdrop-blur-md text-white hover:border-[#CCFF00] hover:text-[#CCFF00] transition-all duration-300 cursor-pointer active:scale-95"
+          aria-label="Open Menu"
+        >
+          <Menu className="w-4 h-4 text-[#CCFF00]" />
         </button>
       </div>
     </header>
