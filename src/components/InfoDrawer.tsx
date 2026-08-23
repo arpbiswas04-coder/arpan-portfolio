@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ArrowLeft, Send, CheckCircle2, Download, ExternalLink, Code2, Cpu, Globe, Sparkles, User, Briefcase, Rocket, FileText, Github, Linkedin } from 'lucide-react';
 import { MediaLightbox } from './MediaLightbox';
+import { supabase } from '../lib/supabase';
 
 interface InfoDrawerProps {
   isOpen: boolean;
@@ -22,6 +23,8 @@ export const InfoDrawer: React.FC<InfoDrawerProps> = ({
 }) => {
   const [activeTab, setActiveTab] = useState<TabType>('MENU');
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const [sendError, setSendError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -59,19 +62,42 @@ export const InfoDrawer: React.FC<InfoDrawerProps> = ({
     }
   }, [initialTab, isOpen]);
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
-    setFormSubmitted(true);
-    setTimeout(() => {
-      setFormSubmitted(false);
-      setFormData({
-        name: '',
-        email: '',
-        projectType: '',
-        message: '',
+
+    setIsSending(true);
+    setSendError(null);
+
+    try {
+      const { error } = await supabase.from('messages').insert({
+        name: formData.name,
+        email: formData.email,
+        project_type: formData.projectType,
+        message: formData.message,
       });
-    }, 4000);
+
+      if (error) {
+        console.error('Error submitting form:', error);
+        setSendError('Something went wrong — please try again or reach out directly.');
+      } else {
+        setFormSubmitted(true);
+        setFormData({
+          name: '',
+          email: '',
+          projectType: '',
+          message: '',
+        });
+        setTimeout(() => {
+          setFormSubmitted(false);
+        }, 4000);
+      }
+    } catch (err) {
+      console.error('Unexpected error submitting form:', err);
+      setSendError('Something went wrong — please try again or reach out directly.');
+    } finally {
+      setIsSending(false);
+    }
   };
 
   const navItems = [
@@ -625,11 +651,18 @@ export const InfoDrawer: React.FC<InfoDrawerProps> = ({
                         {/* Submit Button */}
                         <button
                           type="submit"
-                          className="w-full bg-[#CCFF00] text-black font-bold uppercase tracking-wider py-4 rounded-xl hover:bg-white transition-all shadow-[0_0_20px_rgba(204,255,0,0.3)] flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99]"
+                          disabled={isSending}
+                          className="w-full bg-[#CCFF00] text-black font-bold uppercase tracking-wider py-4 rounded-xl hover:bg-white transition-all shadow-[0_0_20px_rgba(204,255,0,0.3)] flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           <Send className="w-4 h-4" />
-                          <span>SUBMIT COMMISSION REQUEST</span>
+                          <span>{isSending ? 'SENDING...' : 'SUBMIT COMMISSION REQUEST'}</span>
                         </button>
+
+                        {sendError && (
+                          <p className="font-mono text-xs text-red-400 text-center mt-2">
+                            {sendError}
+                          </p>
+                        )}
                       </form>
                     )}
                   </div>
