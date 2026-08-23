@@ -2,7 +2,7 @@ import React from 'react';
 
 export const HeroImage: React.FC = () => {
   return (
-    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-10 flex items-end justify-center pointer-events-auto select-none h-[75vh] sm:h-[82vh] md:h-[88vh] lg:h-[92vh] w-full max-w-3xl overflow-visible">
+    <div className="absolute bottom-0 right-[-18%] sm:right-[-15%] md:right-auto md:left-1/2 md:-translate-x-1/2 z-10 flex items-end justify-end md:justify-center pointer-events-auto select-none h-[700vh] sm:h-[750vh] md:h-[88vh] lg:h-[92vh] w-full max-w-none sm:max-w-none md:max-w-3xl overflow-visible">
       <div className="relative w-full h-full flex items-end justify-center group">
         <img
           src="/profile.png"

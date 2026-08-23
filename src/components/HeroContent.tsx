@@ -100,6 +100,10 @@ export const HeroContent: React.FC = () => {
           BUILD WITH + ROTATING WORD
           ===================================================== */}
 
+      {/* =====================================================
+          HEADLINE: BUILD WITH + ROTATING WORD
+          ===================================================== */}
+
       <div
         className="
           absolute
@@ -110,8 +114,12 @@ export const HeroContent: React.FC = () => {
           lg:left-[35px]
           xl:left-[40px]
 
-          top-[72%]
-          -translate-y-1/2
+          bottom-[8%]
+          top-auto
+          translate-y-0
+          md:bottom-auto
+          md:top-[72%]
+          md:-translate-y-1/2
 
           flex
           flex-col
@@ -125,9 +133,7 @@ export const HeroContent: React.FC = () => {
           z-30
         "
       >
-
         {/* BUILD WITH */}
-
         <h2
           className="
             font-display
@@ -139,8 +145,8 @@ export const HeroContent: React.FC = () => {
             leading-none
             scale-y-110
 
-            text-[30px]
-            sm:text-[36px]
+            text-[40px]
+            sm:text-[44px]
             md:text-[44px]
             lg:text-[54px]
             xl:text-[72px]
@@ -154,11 +160,7 @@ export const HeroContent: React.FC = () => {
           BUILD WITH
         </h2>
 
-
-        {/* =====================================================
-            ROTATING WORD
-            ===================================================== */}
-
+        {/* ROTATING WORD */}
         <h1
           className="
             font-display
@@ -169,9 +171,9 @@ export const HeroContent: React.FC = () => {
 
             text-[#CCFF00]
 
-            text-[58px]
-            sm:text-[76px]
-            md:text-[94px]
+            text-[clamp(52px,15vw,76px)]
+            sm:text-[88px]
+            md:text-[90px]
             lg:text-[116px]
             xl:text-[155px]
 
@@ -185,31 +187,151 @@ export const HeroContent: React.FC = () => {
         >
           <ScrambleText wordIndex={wordIndex} />
         </h1>
-
       </div>
 
 
       {/* =====================================================
-          TOP RIGHT
-          BIO + AVAILABILITY
+          MOBILE ONLY: AVAILABILITY BADGE & BIO PARAGRAPH
+          ===================================================== */}
+
+      <div className="block md:hidden">
+        {/* Availability Badge at top left */}
+        <div
+          className="
+            absolute
+            top-[9%]
+            left-[20px]
+            sm:left-[25px]
+
+            flex
+            items-center
+            gap-2
+
+            font-mono
+            uppercase
+            tracking-widest
+            text-white/50
+            text-left
+
+            text-[8px]
+            sm:text-[9px]
+
+            z-20
+          "
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-[#CCFF00] animate-ping shrink-0" />
+          <span>
+            AVAILABLE FOR AI/ML ENGINEERING &amp; SYSTEM ARCHITECTURE
+          </span>
+        </div>
+
+        {/* Bio Paragraph to the left of the image */}
+        <div
+          className="
+            absolute
+            top-[22%]
+            left-[20px]
+            sm:left-[25px]
+
+            w-[55%]
+            sm:w-[50%]
+
+            flex
+            flex-col
+            items-start
+
+            text-left
+            z-20
+          "
+        >
+          <p
+            className="
+              font-sans
+              text-white/80
+              font-normal
+              leading-relaxed
+              tracking-wide
+              text-left
+
+              text-[11px]
+              sm:text-xs
+
+              min-h-[3.5rem]
+              whitespace-normal
+              break-normal
+            "
+          >
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={bioKey}
+                className="inline-block text-left"
+              >
+                {(() => {
+                  let globalCharIndex = 0;
+                  const words = bioText.split(" ");
+
+                  return words.map((word, wordIndex) => {
+                    const chars = word.split("");
+                    const wordStartIndex = globalCharIndex;
+                    globalCharIndex += chars.length + 1;
+
+                    return (
+                      <span
+                        key={`word-m-${wordIndex}`}
+                        className="inline-block whitespace-nowrap"
+                      >
+                        {chars.map((char, charIndex) => {
+                          const charGlobalIndex = wordStartIndex + charIndex;
+                          return (
+                            <motion.span
+                              key={`m-${bioKey}-${charGlobalIndex}`}
+                              initial={{ opacity: 0, y: 6 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{
+                                delay: charGlobalIndex * 0.02,
+                                duration: 0.05,
+                                ease: "easeOut",
+                              }}
+                              className="inline-block"
+                            >
+                              {char}
+                            </motion.span>
+                          );
+                        })}
+                        {wordIndex < words.length - 1 && (
+                          <span className="inline-block">&nbsp;</span>
+                        )}
+                      </span>
+                    );
+                  });
+                })()}
+              </motion.span>
+            </AnimatePresence>
+          </p>
+        </div>
+      </div>
+
+
+      {/* =====================================================
+          DESKTOP ONLY: TOP-RIGHT STACKED BIO + BADGE (md:flex)
           ===================================================== */}
 
       <div
         className="
+          hidden
+          md:flex
+
           absolute
 
-          top-[17%]
+          md:top-[17%]
 
-          right-[20px]
-          sm:right-[30px]
           md:right-[40px]
           lg:right-[50px]
           xl:right-[60px]
 
-          w-[42%]
+          md:w-[42%]
           max-w-[560px]
 
-          flex
           flex-col
           items-end
 
@@ -217,13 +339,8 @@ export const HeroContent: React.FC = () => {
           z-20
         "
       >
-
-        {/* =====================================================
-            TYPEWRITER BIO
-            ===================================================== */}
-
+        {/* TYPEWRITER BIO */}
         <div className="w-full text-right">
-
           <p
             className="
               font-sans
@@ -233,8 +350,6 @@ export const HeroContent: React.FC = () => {
               tracking-wide
               text-right
 
-              text-[11px]
-              sm:text-xs
               md:text-sm
               lg:text-base
               xl:text-lg
@@ -244,98 +359,56 @@ export const HeroContent: React.FC = () => {
               break-normal
             "
           >
-
             <AnimatePresence mode="wait">
-
               <motion.span
                 key={bioKey}
                 className="inline-block text-right"
               >
-
                 {(() => {
                   let globalCharIndex = 0;
-
                   const words = bioText.split(" ");
 
                   return words.map((word, wordIndex) => {
-
                     const chars = word.split("");
-
-                    const wordStartIndex =
-                      globalCharIndex;
-
-                    globalCharIndex +=
-                      chars.length + 1;
+                    const wordStartIndex = globalCharIndex;
+                    globalCharIndex += chars.length + 1;
 
                     return (
                       <span
-                        key={`word-${wordIndex}`}
-                        className="
-                          inline-block
-                          whitespace-nowrap
-                        "
+                        key={`word-d-${wordIndex}`}
+                        className="inline-block whitespace-nowrap"
                       >
-
-                        {chars.map(
-                          (char, charIndex) => {
-
-                            const charGlobalIndex =
-                              wordStartIndex +
-                              charIndex;
-
-                            return (
-                              <motion.span
-                                key={`${bioKey}-${charGlobalIndex}`}
-                                initial={{
-                                  opacity: 0,
-                                  y: 6,
-                                }}
-                                animate={{
-                                  opacity: 1,
-                                  y: 0,
-                                }}
-                                transition={{
-                                  delay:
-                                    charGlobalIndex *
-                                    0.02,
-                                  duration: 0.05,
-                                  ease: "easeOut",
-                                }}
-                                className="
-                                  inline-block
-                                "
-                              >
-                                {char}
-                              </motion.span>
-                            );
-                          }
+                        {chars.map((char, charIndex) => {
+                          const charGlobalIndex = wordStartIndex + charIndex;
+                          return (
+                            <motion.span
+                              key={`d-${bioKey}-${charGlobalIndex}`}
+                              initial={{ opacity: 0, y: 6 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{
+                                delay: charGlobalIndex * 0.02,
+                                duration: 0.05,
+                                ease: "easeOut",
+                              }}
+                              className="inline-block"
+                            >
+                              {char}
+                            </motion.span>
+                          );
+                        })}
+                        {wordIndex < words.length - 1 && (
+                          <span className="inline-block">&nbsp;</span>
                         )}
-
-                        {wordIndex <
-                          words.length - 1 && (
-                            <span className="inline-block">
-                              &nbsp;
-                            </span>
-                          )}
-
                       </span>
                     );
                   });
                 })()}
-
               </motion.span>
-
             </AnimatePresence>
-
           </p>
-
         </div>
 
-
-        {/* =====================================================
-            AVAILABILITY INDICATOR
-            ===================================================== */}
-
+        {/* AVAILABILITY INDICATOR */}
         <div
           className="
             mt-3
@@ -354,34 +427,26 @@ export const HeroContent: React.FC = () => {
             text-white/50
             text-right
 
-            text-[7px]
-            sm:text-[8px]
             md:text-[9px]
             lg:text-[10px]
             xl:text-[11px]
           "
         >
-
           <span
             className="
               w-1.5
               h-1.5
               sm:w-2
               sm:h-2
-
               rounded-full
               bg-[#CCFF00]
               animate-ping
             "
           />
-
           <span>
-            AVAILABLE FOR AI/ML ENGINEERING &amp;
-            SYSTEM ARCHITECTURE
+            AVAILABLE FOR AI/ML ENGINEERING &amp; SYSTEM ARCHITECTURE
           </span>
-
         </div>
-
       </div>
 
     </div>
