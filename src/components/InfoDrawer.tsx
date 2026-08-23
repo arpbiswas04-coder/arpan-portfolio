@@ -105,7 +105,7 @@ export const InfoDrawer: React.FC<InfoDrawerProps> = ({
     { id: 'PROJECTS', label: 'PROJECTS', desc: 'Featured Work & Case Studies', icon: Rocket },
     { id: 'EXPERIENCE', label: 'JOURNEY', desc: 'Academics, Projects & Hackathon Timeline', icon: Briefcase },
     { id: 'RESUME', label: 'RESUME', desc: 'Technical Skills & CV', icon: FileText },
-    { id: "LET'S BUILD", label: "LET'S BUILD", desc: 'Commission & Consultation', icon: Sparkles },
+    { id: "LET'S BUILD", label: "LET'S BUILD", desc: 'Collaboration & Inquiries', icon: Sparkles },
   ];
 
   const projects = [
@@ -658,7 +658,7 @@ export const InfoDrawer: React.FC<InfoDrawerProps> = ({
                           className="w-full bg-[#CCFF00] text-black font-bold uppercase tracking-wider py-4 rounded-xl hover:bg-white transition-all shadow-[0_0_20px_rgba(204,255,0,0.3)] flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           <Send className="w-4 h-4" />
-                          <span>{isSending ? 'SENDING...' : 'SUBMIT COMMISSION REQUEST'}</span>
+                          <span>{isSending ? 'SENDING...' : 'SEND MESSAGE'}</span>
                         </button>
 
                         {sendError && (
