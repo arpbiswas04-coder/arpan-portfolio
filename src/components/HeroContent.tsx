@@ -110,13 +110,15 @@ export const HeroContent: React.FC = () => {
           lg:left-[35px]
           xl:left-[40px]
 
-          top-[51%]
+          top-[72%]
           -translate-y-1/2
 
           flex
           flex-col
           items-start
           justify-start
+          gap-1
+          sm:gap-2
 
           text-left
           leading-none
