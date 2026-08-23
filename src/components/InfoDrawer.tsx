@@ -77,7 +77,7 @@ export const InfoDrawer: React.FC<InfoDrawerProps> = ({
   const navItems = [
     { id: 'ABOUT', label: 'ABOUT', desc: 'Background & Philosophy', icon: User },
     { id: 'PROJECTS', label: 'PROJECTS', desc: 'Featured Work & Case Studies', icon: Rocket },
-    { id: 'EXPERIENCE', label: 'JOURNEY', desc: 'Academic & Hackathon Timeline', icon: Briefcase },
+    { id: 'EXPERIENCE', label: 'JOURNEY', desc: 'Academics, Projects & Hackathon Timeline', icon: Briefcase },
     { id: 'RESUME', label: 'RESUME', desc: 'Technical Skills & CV', icon: FileText },
     { id: "LET'S BUILD", label: "LET'S BUILD", desc: 'Commission & Consultation', icon: Sparkles },
   ];
@@ -151,13 +151,14 @@ export const InfoDrawer: React.FC<InfoDrawerProps> = ({
 
   const experience: TimelineItem[] = [
     { type: 'year', role: 'First Year', company: '2025', period: 'SGPA: 9.58' },
-    { type: 'event', title: 'GitHub Dev Card Generator', desc: 'Built an AI-powered developer card generator using Google ADK, FastMCP, and FastAPI.' },
     { type: 'event', title: 'HackArena HIT', desc: 'Built a multiple disease predictor for heart and kidney disease risk.' },
     { type: 'event', title: 'UIDAI Hackathon 2026', desc: 'Built an Aadhaar fraud and anomaly detection system using Isolation Forest.' },
+    { type: 'event', title: 'GitHub Dev Card Generator', desc: 'Built an AI-powered developer card generator using Google ADK, FastMCP, and FastAPI.' },
     { type: 'year', role: 'Second Year', company: 'Current', period: '2026 — Present' },
-    { type: 'event', title: 'Bharatiya Antariksh Hackathon 2026 (ISRO)', desc: 'Building Meghdrishti — GAN-based cloud removal for satellite imagery, with Team Trinova.' },
-    { type: 'event', title: 'Vibecodethon (AB Talks)', desc: 'Built an adaptive AI technical interview agent, with Team Vector.' },
-    { type: 'event', title: 'Tejas India Hackathon', desc: 'Built Setu — a Bihar tourism marketplace connecting tourists with local vendors, with Team 4 Loops.' },
+    { type: 'event', title: 'ArenaX Chess', desc: 'Built a premium AI-powered chess platform with a real-time AI tutor and multiple engine difficulties.' },
+    { type: 'event', title: 'Bharatiya Antariksh Hackathon 2026 (ISRO) — Pre-Finalist', desc: 'Building Meghdrishti — GAN-based cloud removal for satellite imagery, with Team Trinova.' },
+    { type: 'event', title: 'Vibecodethon (AB Talks) — Finalist', desc: 'Built an adaptive AI technical interview agent, with Team Vector.' },
+    { type: 'event', title: 'Tejas India Hackathon — Finalist', desc: 'Built Setu — a Bihar tourism marketplace connecting tourists with local vendors, with Team 4 Loops.' },
   ];
 
   const skillCategories = [
@@ -284,10 +285,10 @@ export const InfoDrawer: React.FC<InfoDrawerProps> = ({
                         BIO & VISION
                       </h4>
                       <p className="text-white/80 leading-relaxed text-sm md:text-base">
-                        I am Arpan — a Computer Science undergrad, engineering team lead, and creative technologist. I bridge high-level system architecture with extreme UI aesthetic precision.
+                        I'm Arpan — a second-year Computer Science student, developer, and engineering team lead. I enjoy building at the intersection of software, AI, and creative technology, turning complex ideas into practical and engaging digital experiences.
                       </p>
                       <p className="text-white/70 leading-relaxed text-sm">
-                        Outside of code, I lead Team Trinova through national-level hackathons, love turning half-finished ideas into working prototypes fast, and I'm always looking for the next hard problem worth building for.
+                        I've led my team through national-level hackathons, reaching the finals twice and the pre-finals once. I thrive on turning half-formed ideas into working prototypes under pressure, bringing people together around difficult problems, and constantly looking for the next challenge worth building for.
                       </p>
                     </div>
 
@@ -337,7 +338,7 @@ export const InfoDrawer: React.FC<InfoDrawerProps> = ({
                       </a>
 
                       <a
-                        href="https://linkedin.com/in/YOUR-HANDLE"
+                        href="https://www.linkedin.com/in/arpan-biswas-1576a7387/"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="group relative flex items-center justify-between p-5 rounded-xl border border-white/10 bg-white/5 hover:bg-[#CCFF00] hover:text-black transition-all duration-300 text-left overflow-hidden"
@@ -469,7 +470,7 @@ export const InfoDrawer: React.FC<InfoDrawerProps> = ({
                 {activeTab === 'EXPERIENCE' && (
                   <div className="space-y-6">
                     <p className="font-mono text-xs text-white/50 tracking-widest uppercase">
-                      // ACADEMIC & HACKATHON TIMELINE
+                      // ACADEMICS, PROJECTS & HACKATHON TIMELINE
                     </p>
                     <div className="relative border-l border-white/20 pl-6 space-y-8 ml-2">
                       {experience.map((item, idx) => (
@@ -488,7 +489,7 @@ export const InfoDrawer: React.FC<InfoDrawerProps> = ({
                           ) : (
                             <>
                               <div className="absolute -left-[31px] top-1.5 w-3 h-3 rounded-full bg-[#333333] border-2 border-white group-hover:bg-white transition-colors" />
-                              <h5 className="font-sans text-sm font-semibold text-white">
+                              <h5 className="font-sans text-sm font-semibold text-[#CCFF00]">
                                 {item.title}
                               </h5>
                               <p className="font-sans text-xs text-white/70 leading-relaxed mt-1">

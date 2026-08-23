@@ -206,7 +206,7 @@ export const HeroContent: React.FC = () => {
           xl:right-[60px]
 
           w-[42%]
-          max-w-[500px]
+          max-w-[560px]
 
           flex
           flex-col
@@ -236,6 +236,8 @@ export const HeroContent: React.FC = () => {
               xl:text-lg
 
               min-h-[3.5rem]
+              whitespace-normal
+              break-normal
             "
           >
 
@@ -246,31 +248,47 @@ export const HeroContent: React.FC = () => {
                 className="inline-block text-right"
               >
 
-                {bioText.split("").map(
-                  (char, index) => (
-                    <motion.span
-                      key={`${bioKey}-${index}`}
-                      initial={{
-                        opacity: 0,
-                        y: 6,
-                      }}
-                      animate={{
-                        opacity: 1,
-                        y: 0,
-                      }}
-                      transition={{
-                        delay: index * 0.02,
-                        duration: 0.05,
-                        ease: "easeOut",
-                      }}
-                      className="inline-block"
-                    >
-                      {char === " "
-                        ? "\u00A0"
-                        : char}
-                    </motion.span>
-                  )
-                )}
+                {(() => {
+                  let globalCharIndex = 0;
+                  const words = bioText.split(" ");
+                  return words.map((word, wordIndex) => {
+                    const chars = word.split("");
+                    const wordStartIndex = globalCharIndex;
+                    globalCharIndex += chars.length + 1;
+
+                    return (
+                      <span key={`word-${wordIndex}`} className="inline-block whitespace-nowrap">
+                        {chars.map((char, charIndex) => {
+                          const charGlobalIndex = wordStartIndex + charIndex;
+                          return (
+                            <motion.span
+                              key={`${bioKey}-${charGlobalIndex}`}
+                              initial={{
+                                opacity: 0,
+                                y: 6,
+                              }}
+                              animate={{
+                                opacity: 1,
+                                y: 0,
+                              }}
+                              transition={{
+                                delay: charGlobalIndex * 0.02,
+                                duration: 0.05,
+                                ease: "easeOut",
+                              }}
+                              className="inline-block"
+                            >
+                              {char}
+                            </motion.span>
+                          );
+                        })}
+                        {wordIndex < words.length - 1 && (
+                          <span className="inline-block">&nbsp;</span>
+                        )}
+                      </span>
+                    );
+                  });
+                })()}
 
               </motion.span>
 

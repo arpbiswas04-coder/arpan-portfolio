@@ -16,8 +16,8 @@ export const Header: React.FC<HeaderProps> = ({ onOpenDrawer }) => {
         <span className="font-display text-2xl md:text-3xl tracking-widest text-white transition-colors group-hover:text-[#CCFF00]">
           ARPAN
         </span>
-        <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-[#CCFF00] text-black flex items-center justify-center font-bold text-base shadow-[0_0_15px_rgba(204,255,0,0.4)] transition-transform duration-500 ease-out group-hover:rotate-180 group-hover:scale-110">
-          ✦
+        <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-[#CCFF00] text-black flex items-center justify-center font-display font-bold text-base md:text-lg shadow-[0_0_15px_rgba(204,255,0,0.4)] transition-transform duration-500 ease-out group-hover:rotate-180 group-hover:scale-110 leading-none">
+          A
         </div>
       </div>
 
