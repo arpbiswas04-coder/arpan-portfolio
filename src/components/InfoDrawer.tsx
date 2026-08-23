@@ -535,13 +535,16 @@ export const InfoDrawer: React.FC<InfoDrawerProps> = ({
                     <div className="p-6 rounded-2xl border border-white/10 bg-white/5 space-y-4">
                       <div className="flex items-center justify-between">
                         <h4 className="font-display text-2xl text-white uppercase">CURRICULUM VITAE</h4>
-                        <button
-                          onClick={() => alert("Downloading Arpan's Resume (PDF)...")}
+                        <a
+                          href="/Arpan-Biswas-CV.pdf"
+                          download="Arpan-Biswas-CV.pdf"
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="font-mono text-xs px-4 py-2 rounded-lg bg-[#CCFF00] text-black font-bold flex items-center gap-2 hover:bg-white transition-colors cursor-pointer"
                         >
                           <Download className="w-3.5 h-3.5" />
                           <span>DOWNLOAD CV</span>
-                        </button>
+                        </a>
                       </div>
                       <p className="text-xs text-white/70 leading-relaxed">
                         Computer Science undergrad specializing in AI and ML, with hands-on experience deploying Python projects using FastAPI, Docker, and Google Cloud Run, and building AI agent systems with Google ADK, Gemini, and MCP.
