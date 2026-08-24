@@ -115,7 +115,7 @@ export const InfoDrawer: React.FC<InfoDrawerProps> = ({
       desc: 'A marketplace platform connecting tourists with local vendors — homestays, guides, artisans, and experience providers — across Bihar, with AI-assisted trip discovery and bilingual content.',
       tech: ['React', 'Node.js', 'AI Travel Assistant'],
       link: 'https://github.com/arpbiswas04-coder/SETU---TEJAS-INDIA-HACKATHON',
-      media: ['/SETU1.jpeg','/SETU2.jpeg','/SETU3.jpeg','/SETU4.jpeg','/SETU5.jpeg','/SETU6.jpeg','/SETU7.jpeg','/SETU8.jpeg','/SETU9.jpeg','/SETU10.jpeg','/SETU11.jpeg','/SETU12.jpeg'],
+      media: ['/SETU1.jpeg', '/SETU2.jpeg', '/SETU3.jpeg', '/SETU4.jpeg', '/SETU5.jpeg', '/SETU6.jpeg', '/SETU7.jpeg', '/SETU8.jpeg', '/SETU9.jpeg', '/SETU10.jpeg', '/SETU11.jpeg', '/SETU12.jpeg'],
     },
     {
       title: 'Meghdrishti',
@@ -123,7 +123,7 @@ export const InfoDrawer: React.FC<InfoDrawerProps> = ({
       desc: 'GenAI-based cloud removal and reconstruction system for LISS-IV satellite imagery, built for the Bharatiya Antariksh Hackathon 2026.',
       tech: ['Python', 'GAN', 'PyTorch'],
       link: 'https://github.com/arpbiswas04-coder/Meghdrishti',
-      media: ['/MEGHDRISHTI1.jpeg','/MEGHDRISHTI2.jpeg','/MEGHDRISHTI3.jpeg','/MEGHDRISHTI4.jpeg'],
+      media: ['/MEGHDRISHTI1.jpeg', '/MEGHDRISHTI2.jpeg', '/MEGHDRISHTI3.jpeg', '/MEGHDRISHTI4.jpeg'],
     },
     {
       title: 'Enterprise AI Interviewer',
@@ -131,7 +131,7 @@ export const InfoDrawer: React.FC<InfoDrawerProps> = ({
       desc: "An adaptive, multi-turn AI technical interview agent that conducts realistic, personalized interviews grounded in a candidate's actual learning journey — not a scripted quiz.",
       tech: ['Python', 'LLM Agents'],
       link: 'https://github.com/arpbiswas04-coder/Vibecodethon',
-      media: ['/INTERVIEW1.jpeg','/INTERVIEW2.jpeg','/INTERVIEW3.jpeg','/INTERVIEW4.jpeg','/INTERVIEW5.jpeg','/INTERVIEW6.jpeg'],
+      media: ['/INTERVIEW1.jpeg', '/INTERVIEW2.jpeg', '/INTERVIEW3.jpeg', '/INTERVIEW4.jpeg', '/INTERVIEW5.jpeg', '/INTERVIEW6.jpeg'],
     },
     {
       title: 'ArenaX Chess',
@@ -139,7 +139,7 @@ export const InfoDrawer: React.FC<InfoDrawerProps> = ({
       desc: 'A premium, AI-powered single-page chess platform with immersive game modes, a real-time AI tutor, and multiple engine difficulty levels.',
       tech: ['React', 'Gemini AI', 'JavaScript'],
       link: 'https://github.com/arpbiswas04-coder/ArenaX-Chess',
-      media: ['/ARENA1.jpeg','/ARENA2.jpeg','/ARENA3.jpeg','/ARENA4.jpeg','/ARENA5.jpeg','/ARENA6.jpeg'],
+      media: ['/ARENA1.jpeg', '/ARENA2.jpeg', '/ARENA3.jpeg', '/ARENA4.jpeg', '/ARENA5.jpeg', '/ARENA6.jpeg'],
     },
     {
       title: 'GitHub Dev Card Generator',
@@ -179,9 +179,7 @@ export const InfoDrawer: React.FC<InfoDrawerProps> = ({
     { type: 'year', role: 'First Year', company: '2025', period: 'SGPA: 9.58' },
     { type: 'event', title: 'HackArena HIT', desc: 'Built a multiple disease predictor for heart and kidney disease risk.' },
     { type: 'event', title: 'UIDAI Hackathon 2026', desc: 'Built an Aadhaar fraud and anomaly detection system using Isolation Forest.' },
-    { type: 'event', title: 'GitHub Dev Card Generator', desc: 'Built an AI-powered developer card generator using Google ADK, FastMCP, and FastAPI.' },
     { type: 'year', role: 'Second Year', company: 'Current', period: '2026 — Present' },
-    { type: 'event', title: 'ArenaX Chess', desc: 'Built a premium AI-powered chess platform with a real-time AI tutor and multiple engine difficulties.' },
     { type: 'event', title: 'Bharatiya Antariksh Hackathon 2026 (ISRO) — Pre-Finalist', desc: 'Building Meghdrishti — GAN-based cloud removal for satellite imagery, with Team Trinova.' },
     { type: 'event', title: 'Vibecodethon (AB Talks) — Finalist', desc: 'Built an adaptive AI technical interview agent, with Team Vector.' },
     { type: 'event', title: 'Tejas India Hackathon — Finalist', desc: 'Built Setu — a Bihar tourism marketplace connecting tourists with local vendors, with Team 4 Loops.' },
@@ -404,7 +402,7 @@ export const InfoDrawer: React.FC<InfoDrawerProps> = ({
                         >
                           {/* Media Gallery Preview Grid (if media.length > 0) */}
                           {proj.media && proj.media.length > 0 && (
-                            <div 
+                            <div
                               className="grid grid-cols-4 gap-2 mb-3"
                               onClick={(e) => e.stopPropagation()}
                             >
