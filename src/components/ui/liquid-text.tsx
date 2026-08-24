@@ -8,11 +8,20 @@ import { cn } from "@/lib/utils";
 const morphTime = 0.8;
 const cooldownTime = 0.35;
 
-const useMorphingText = (texts: string[]) => {
+interface UseMorphingTextOptions {
+  loop?: boolean;
+  onSettled?: () => void;
+}
+
+const useMorphingText = (
+  texts: string[],
+  options?: UseMorphingTextOptions,
+) => {
   const textIndexRef = useRef(0);
   const morphRef = useRef(0);
   const cooldownRef = useRef(0);
   const timeRef = useRef(new Date());
+  const isFrozenRef = useRef(false);
 
   const text1Ref = useRef<HTMLSpanElement>(null);
   const text2Ref = useRef<HTMLSpanElement>(null);
@@ -49,9 +58,15 @@ const useMorphingText = (texts: string[]) => {
     setStyles(fraction);
 
     if (fraction === 1) {
-      textIndexRef.current++;
+      if (options?.loop === false && textIndexRef.current === texts.length - 2) {
+        textIndexRef.current++;
+        isFrozenRef.current = true;
+        options.onSettled?.();
+      } else {
+        textIndexRef.current++;
+      }
     }
-  }, [setStyles]);
+  }, [setStyles, texts, options]);
 
   const doCooldown = useCallback(() => {
     morphRef.current = 0;
@@ -66,8 +81,13 @@ const useMorphingText = (texts: string[]) => {
 
   useEffect(() => {
     let animationFrameId: number;
+    let startTimeoutId: ReturnType<typeof setTimeout>;
+
+    // Render initial word at 100% opacity, unblurred
+    setStyles(0);
 
     const animate = () => {
+      if (isFrozenRef.current) return;
       animationFrameId = requestAnimationFrame(animate);
 
       const newTime = new Date();
@@ -80,11 +100,17 @@ const useMorphingText = (texts: string[]) => {
       else doCooldown();
     };
 
-    animate();
+    // Hold first word for ~600ms before starting animation loop
+    startTimeoutId = setTimeout(() => {
+      timeRef.current = new Date();
+      animate();
+    }, 600);
+
     return () => {
+      clearTimeout(startTimeoutId);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [doMorph, doCooldown]);
+  }, [setStyles, doMorph, doCooldown]);
 
   return { text1Ref, text2Ref };
 };
@@ -92,10 +118,16 @@ const useMorphingText = (texts: string[]) => {
 interface MorphingTextProps {
   className?: string;
   texts: string[];
+  loop?: boolean;
+  onSettled?: () => void;
 }
 
-const Texts: React.FC<Pick<MorphingTextProps, "texts">> = ({ texts }) => {
-  const { text1Ref, text2Ref } = useMorphingText(texts);
+const Texts: React.FC<Pick<MorphingTextProps, "texts" | "loop" | "onSettled">> = ({
+  texts,
+  loop,
+  onSettled,
+}) => {
+  const { text1Ref, text2Ref } = useMorphingText(texts, { loop, onSettled });
   return (
     <>
       <span
@@ -127,14 +159,19 @@ const SvgFilters: React.FC = () => (
   </svg>
 );
 
-const MorphingText: React.FC<MorphingTextProps> = ({ texts, className }) => (
+const MorphingText: React.FC<MorphingTextProps> = ({
+  texts,
+  className,
+  loop,
+  onSettled,
+}) => (
   <div
     className={cn(
       "relative mx-auto h-16 w-full max-w-screen-md text-center font-sans text-[40pt] font-bold leading-none [filter:url(#threshold)_blur(0.6px)] md:h-24 lg:text-[6rem]",
       className,
     )}
   >
-    <Texts texts={texts} />
+    <Texts texts={texts} loop={loop} onSettled={onSettled} />
     <SvgFilters />
   </div>
 );

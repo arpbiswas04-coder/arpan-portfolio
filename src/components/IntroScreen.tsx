@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { MorphingText } from '@/components/ui/liquid-text';
 
@@ -6,26 +6,22 @@ interface IntroScreenProps {
   onComplete: () => void;
 }
 
-const INTRO_WORDS = ["Hello", "Hola", "Bonjour", "नमस्ते", "নমস্কার"];
+const INTRO_WORDS = ["Hello", "नमस्ते", "নমস্কার"];
 
 export const IntroScreen: React.FC<IntroScreenProps> = ({ onComplete }) => {
-  useEffect(() => {
-    // 5 words, morphTime=s + cooldownTime=0.35s = 1.15s per cycle.
-    // 4 transitions to reach word 5 (Bengali) = 4.6s + cooldown display window.
-    // Trigger fade-out at ~4700ms before starting 5th transition back to English.
-    const fadeTimer = setTimeout(() => {
+  const handleSettled = () => {
+    // Hold final word for 700ms after morph settles, then trigger exit fade-out
+    setTimeout(() => {
       onComplete();
-    }, 4700);
-
-    return () => clearTimeout(fadeTimer);
-  }, [onComplete]);
+    }, 700);
+  };
 
   return (
     <motion.div
-      initial={{ opacity: 1 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0, scale: 1.03, filter: 'blur(10px)' }}
-      transition={{ duration: 0.8, ease: 'easeInOut' }}
+      initial={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+      animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+      exit={{ opacity: 0, scale: 1.05, filter: 'blur(12px)' }}
+      transition={{ duration: 1.1, ease: 'easeInOut' }}
       className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-black pointer-events-auto select-none"
     >
       {/* Background Video */}
@@ -47,6 +43,8 @@ export const IntroScreen: React.FC<IntroScreenProps> = ({ onComplete }) => {
       <div className="relative z-10 w-full max-w-4xl px-4 flex items-center justify-center">
         <MorphingText
           texts={INTRO_WORDS}
+          loop={false}
+          onSettled={handleSettled}
           className="text-[#CCFF00] [text-shadow:0_0_40px_rgba(204,255,0,0.5)] font-display uppercase tracking-wider text-[28px] sm:text-[44px] md:text-[64px] lg:text-[6rem]"
         />
       </div>
