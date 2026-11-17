@@ -6,6 +6,21 @@ $params.Param[0] = New-Object System.Drawing.Imaging.EncoderParameter([System.Dr
 foreach ($folder in $sourceFolders) {
   Get-ChildItem -LiteralPath $folder -File | Where-Object { $_.Extension -in '.png','.jpg','.jpeg' -and $_.Name -ne 'profile.png' } | ForEach-Object {
     $source = [System.Drawing.Image]::FromFile($_.FullName)
+    # Apply EXIF orientation before resizing; browsers already do this for originals.
+    if ($source.PropertyIdList -contains 274) {
+      $orientation = [BitConverter]::ToUInt16($source.GetPropertyItem(274).Value, 0)
+      $transform = switch ($orientation) {
+        2 { 'RotateNoneFlipX' }
+        3 { 'Rotate180FlipNone' }
+        4 { 'Rotate180FlipX' }
+        5 { 'Rotate90FlipX' }
+        6 { 'Rotate90FlipNone' }
+        7 { 'Rotate270FlipX' }
+        8 { 'Rotate270FlipNone' }
+        default { 'RotateNoneFlipNone' }
+      }
+      $source.RotateFlip([System.Drawing.RotateFlipType]::$transform)
+    }
     $limit = if ($folder -eq 'certificates') { 1000 } else { 480 }
     $width = [Math]::Min($limit, $source.Width)
     $height = [Math]::Max(1, [int]($source.Height * $width / $source.Width))
