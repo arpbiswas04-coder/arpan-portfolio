@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, MotionConfig } from 'framer-motion';
 import { BackgroundVideo } from './components/BackgroundVideo';
 import { CursorGlow } from './components/CursorGlow';
 import { Header } from './components/Header';
@@ -10,9 +10,24 @@ import { InfoDrawer } from './components/InfoDrawer';
 import { IntroScreen } from './components/IntroScreen';
 
 export function App() {
+  const [pageHidden, setPageHidden] = useState(document.hidden);
+  useEffect(() => {
+    const update = () => setPageHidden(document.hidden);
+    document.addEventListener('visibilitychange', update);
+    return () => document.removeEventListener('visibilitychange', update);
+  }, []);
+  // Match the breakpoint where the drawer stops covering the entire viewport.
+  const [isMobile, setIsMobile] = useState(() => window.matchMedia('(max-width: 639px)').matches);
+  useEffect(() => {
+    const query = window.matchMedia('(max-width: 639px)');
+    const update = () => setIsMobile(query.matches);
+    query.addEventListener('change', update);
+    return () => query.removeEventListener('change', update);
+  }, []);
   const [showIntro, setShowIntro] = useState(true);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [drawerTab, setDrawerTab] = useState<string>('MENU');
+  const pauseHero = pageHidden || showIntro || (isMobile && isDrawerOpen);
 
   useEffect(() => {
     if (showIntro) {
@@ -36,7 +51,8 @@ export function App() {
   };
 
   return (
-    <main className="relative w-full h-screen min-h-screen overflow-hidden flex flex-col justify-between bg-[#030014] text-white selection:bg-[#CCFF00] selection:text-black">
+    <MotionConfig reducedMotion="user">
+    <main data-paused={pauseHero} className="portfolio-shell relative w-full overflow-hidden flex flex-col justify-between bg-[#030014] text-white selection:bg-[#CCFF00] selection:text-black">
       {/* Intro Splash Screen Overlay */}
       <AnimatePresence>
         {showIntro && (
@@ -45,16 +61,16 @@ export function App() {
       </AnimatePresence>
 
       {/* Background Video */}
-      <BackgroundVideo />
+      <BackgroundVideo paused={pauseHero} />
 
       {/* Cursor Reactive Glow Layer */}
-      <CursorGlow />
+      <CursorGlow paused={pauseHero} />
 
       {/* z-30: Fixed Header */}
       <Header onOpenDrawer={handleOpenDrawer} />
 
       {/* z-20: Hero Content (Mammoth Headline & Typewriter Bio) */}
-      <HeroContent />
+      <HeroContent paused={pauseHero} />
 
       {/* z-10: Subject Cut-out Hero Image */}
       <HeroImage />
@@ -69,6 +85,7 @@ export function App() {
         initialTab={drawerTab}
       />
     </main>
+    </MotionConfig>
   );
 }
 

@@ -1,63 +1,30 @@
 import React, { useEffect, useRef } from 'react';
+import { useReducedMotion } from 'framer-motion';
 
-export const CursorGlow: React.FC = () => {
-  const glowRef = useRef<HTMLDivElement>(null);
-  const targetPos = useRef({ x: -500, y: -500 });
-  const currentPos = useRef({ x: -500, y: -500 });
-  const animationFrameId = useRef<number | null>(null);
-
+export const CursorGlow: React.FC<{ paused?: boolean }> = ({ paused = false }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const reducedMotion = useReducedMotion();
   useEffect(() => {
-    // Center glow initially before first mouse movement
-    targetPos.current = {
-      x: window.innerWidth / 2,
-      y: window.innerHeight / 2,
+    if (paused || reducedMotion) return;
+    const pointer = matchMedia('(hover: hover) and (pointer: fine)');
+    let frame = 0;
+    const current = { x: innerWidth / 2, y: innerHeight / 2 };
+    const target = { ...current };
+    const update = () => {
+      current.x += (target.x - current.x) * 0.12;
+      current.y += (target.y - current.y) * 0.12;
+      if (ref.current) ref.current.style.transform = `translate3d(${current.x - 225}px, ${current.y - 225}px, 0)`;
+      frame = Math.abs(target.x - current.x) + Math.abs(target.y - current.y) > 0.5 ? requestAnimationFrame(update) : 0;
     };
-    currentPos.current = {
-      x: window.innerWidth / 2,
-      y: window.innerHeight / 2,
+    const move = (event: PointerEvent) => {
+      if (!pointer.matches) return;
+      target.x = event.clientX; target.y = event.clientY;
+      if (!frame) frame = requestAnimationFrame(update);
     };
-
-    const handleMouseMove = (e: MouseEvent) => {
-      targetPos.current.x = e.clientX;
-      targetPos.current.y = e.clientY;
-    };
-
-    const updatePosition = () => {
-      // Smooth lerp trailing effect (8% position delta per frame)
-      const lerpFactor = 0.08;
-      currentPos.current.x += (targetPos.current.x - currentPos.current.x) * lerpFactor;
-      currentPos.current.y += (targetPos.current.y - currentPos.current.y) * lerpFactor;
-
-      if (glowRef.current) {
-        glowRef.current.style.transform = `translate3d(${currentPos.current.x}px, ${currentPos.current.y}px, 0px) translate(-50%, -50%)`;
-      }
-
-      animationFrameId.current = requestAnimationFrame(updatePosition);
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    animationFrameId.current = requestAnimationFrame(updatePosition);
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      if (animationFrameId.current !== null) {
-        cancelAnimationFrame(animationFrameId.current);
-      }
-    };
-  }, []);
-
-  return (
-    <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden select-none">
-      <div
-        ref={glowRef}
-        className="absolute top-0 left-0 w-[450px] h-[450px] rounded-full bg-[radial-gradient(circle_at_center,rgba(204,255,0,0.18)_0%,rgba(136,170,255,0.06)_40%,transparent_70%)] blur-3xl pointer-events-none"
-        style={{
-          transform: 'translate3d(-500px, -500px, 0px) translate(-50%, -50%)',
-          willChange: 'transform',
-        }}
-      />
-    </div>
-  );
+    window.addEventListener('pointermove', move, { passive: true });
+    return () => { window.removeEventListener('pointermove', move); cancelAnimationFrame(frame); };
+  }, [paused, reducedMotion]);
+  return <div className="cursor-glow fixed inset-0 z-0 pointer-events-none overflow-hidden" hidden={!!reducedMotion}>
+    <div ref={ref} className="absolute w-[450px] h-[450px] rounded-full bg-[radial-gradient(circle,rgba(204,255,0,0.16),rgba(136,170,255,0.05)_40%,transparent_70%)]" style={{ transform: 'translate3d(-500px,-500px,0)' }} />
+  </div>;
 };
-
-export default CursorGlow;

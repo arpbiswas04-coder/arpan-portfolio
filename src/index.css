@@ -71,3 +71,48 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #CCFF00;
 }
+
+/* Fit the visible mobile viewport, including browser controls and notches. */
+.portfolio-shell { height: 100vh; height: 100dvh; min-height: 360px; }
+.hero-headline { left: clamp(16px, 2.5vw, 40px); right: 16px; bottom: 12%; }
+.hero-kicker { font-size: 46px; }
+.hero-word { font-size: clamp(58px, 17vw, 84px); white-space: nowrap; }
+.hero-bio { top: 22%; left: 20px; width: 55%; max-width: 560px; }
+.bio-reveal { animation: bio-reveal .7s ease-out both; }
+@keyframes bio-reveal { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+[data-paused="true"] .animate-marquee, [data-paused="true"] .animate-pulse { animation-play-state: paused; }
+.drawer-body { overflow-wrap: anywhere; padding-bottom: max(24px, env(safe-area-inset-bottom)); scrollbar-gutter: stable; }
+.project-card, .certificate-card { content-visibility: auto; contain-intrinsic-size: auto 360px; }
+.certificate-card { contain-intrinsic-size: auto 500px; }
+button, a, input, textarea, select { touch-action: manipulation; }
+button:focus-visible, a:focus-visible { outline: 2px solid #CCFF00; outline-offset: 4px; }
+@media (min-width: 640px) {
+  .hero-kicker { font-size: 50px; }
+  .hero-word { font-size: 96px; }
+}
+@media (min-width: 768px) {
+  .hero-kicker { font-size: 44px; }
+  .hero-word { font-size: 90px; }
+  .hero-headline { bottom: auto; top: 72%; transform: translateY(-50%); }
+  .hero-bio { top: 17%; left: auto; right: clamp(30px, 4vw, 60px); width: 42%; text-align: right; }
+}
+@media (min-width: 1024px) {
+  .hero-kicker { font-size: 54px; }
+  .hero-word { font-size: 116px; }
+}
+@media (min-width: 1280px) {
+  .hero-kicker { font-size: 72px; }
+  .hero-word { font-size: 155px; }
+}
+@media (hover: none), (pointer: coarse) { .cursor-glow { display: none; } }
+@media (max-width: 639px) {
+  .drawer-body input, .drawer-body textarea, .drawer-body select { font-size: 16px; }
+}
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero-bio { top: 25%; right: 20px; left: auto; width: 40%; text-align: right; }
+  .hero-bio p { font-size: 11px; }
+  .hero-headline { top: auto; bottom: 18%; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}

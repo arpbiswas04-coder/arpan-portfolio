@@ -22,7 +22,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenDrawer }) => {
       </div>
 
       {/* Center Navigation Links (Hidden on Mobile) */}
-      <nav className="hidden md:flex items-center gap-8 font-mono text-xs tracking-widest text-white/70">
+      <nav className="hidden xl:flex items-center gap-8 font-mono text-xs tracking-widest text-white/70">
         <button
           onClick={() => onOpenDrawer('ABOUT')}
           className="hover:text-[#CCFF00] transition-colors flex items-center gap-1 uppercase relative group py-1"
@@ -51,6 +51,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenDrawer }) => {
           <span>RESUME</span>
           <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-[#CCFF00] transition-all duration-300 group-hover:w-full" />
         </button>
+        <button onClick={() => onOpenDrawer('CERTIFICATES')} className="hover:text-[#CCFF00] transition-colors py-1">CERTIFICATES</button>
       </nav>
 
       {/* Action Controls Group */}
@@ -68,7 +69,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenDrawer }) => {
         {/* Mobile Menu Trigger (Visible only below md, icon-only) */}
         <button
           onClick={() => onOpenDrawer('MENU')}
-          className="flex md:hidden items-center justify-center p-2.5 rounded-full border border-white/20 bg-white/5 backdrop-blur-md text-white hover:border-[#CCFF00] hover:text-[#CCFF00] transition-all duration-300 cursor-pointer active:scale-95"
+          className="flex xl:hidden items-center justify-center p-2.5 rounded-full border border-white/20 bg-white/5 backdrop-blur-md text-white hover:border-[#CCFF00] hover:text-[#CCFF00] transition-all duration-300 cursor-pointer active:scale-95"
           aria-label="Open Menu"
         >
           <Menu className="w-4 h-4 text-[#CCFF00]" />

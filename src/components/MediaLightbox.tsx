@@ -52,7 +52,7 @@ export const MediaLightbox: React.FC<MediaLightboxProps> = ({
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.9, opacity: 0 }}
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-          className="relative max-w-5xl max-h-[85vh] w-full flex items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-[#121212] shadow-2xl"
+          className="relative max-w-5xl max-h-[85dvh] w-full flex items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-[#121212] shadow-2xl"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Close Button */}
@@ -71,13 +71,14 @@ export const MediaLightbox: React.FC<MediaLightboxProps> = ({
                 src={currentItem}
                 controls
                 autoPlay
-                className="max-h-[75vh] max-w-full rounded-lg object-contain shadow-lg"
+                className="max-h-[75dvh] max-w-full rounded-lg object-contain shadow-lg"
               />
             ) : (
               <img
                 src={currentItem}
                 alt={`Media ${currentIndex + 1}`}
-                className="max-h-[75vh] max-w-full rounded-lg object-contain shadow-lg select-none"
+                decoding="async"
+                className="max-h-[75dvh] max-w-full rounded-lg object-contain shadow-lg select-none"
               />
             )}
           </div>
