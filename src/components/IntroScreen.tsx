@@ -40,11 +40,11 @@ export const IntroScreen: React.FC<IntroScreenProps> = ({ onComplete }) => {
 
       {/* Centered Morphing Text */}
       <div className="relative z-10 w-full max-w-4xl px-4 flex items-center justify-center">
-        {reducedMotion ? <span className="font-display text-4xl text-[#CCFF00]">Hello</span> : <MorphingText
+        {reducedMotion ? <span className="font-display text-[clamp(48px,14vw,80px)] md:text-4xl text-[#CCFF00]">Hello</span> : <MorphingText
           texts={INTRO_WORDS}
           loop={false}
           onSettled={handleSettled}
-          className="text-[#CCFF00] [text-shadow:0_0_40px_rgba(204,255,0,0.5)] font-display uppercase tracking-wider text-[28px] sm:text-[44px] md:text-[64px] lg:text-[6rem]"
+          className="text-[#CCFF00] [text-shadow:0_0_40px_rgba(204,255,0,0.5)] font-display uppercase tracking-wider text-[clamp(48px,14vw,80px)] h-24 md:text-[64px] lg:text-[6rem]"
         />}
       </div>
     </motion.div>

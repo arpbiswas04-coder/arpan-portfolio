@@ -116,3 +116,12 @@ button:focus-visible, a:focus-visible { outline: 2px solid #CCFF00; outline-offs
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }
+
+/* Fill more of the phone hero without moving the desktop portrait. */
+@media (max-width: 767px) and (orientation: portrait) {
+  .hero-bio { top: 17%; }
+  .hero-portrait {
+    transform: scale(1.18);
+    transform-origin: 50% 100%;
+  }
+}
